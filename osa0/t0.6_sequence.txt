@@ -1,0 +1,15 @@
+title 0.6 Muistiinpanon lisäys spa versiossa.
+
+kayttaja->selain:
+note right of kayttaja
+ Käyttäjä kirjoittaa muistiinpanon sille varattuun 
+ tekstikenttään ja painaa tallenna painiketta
+end note
+
+note right of selain
+    Sivun javascript päivittää uuden 
+    muistiinpanon sivun muistiinpanolistaan.
+end note
+selain -> kayttaja: Näytetään uudella muistiinpanolla päivitetty sivu
+selain -> palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note_spa
+palvelin -> selain: status 201 + JSON -paluusanoma ({"message":"note created"})

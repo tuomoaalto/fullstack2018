@@ -1,0 +1,27 @@
+title 0.5 Navigointi Muistiinpanot -sivun spa versioon.
+
+kayttaja->selain:
+note right of kayttaja
+ Käyttäjä kirjoittaa selaimen osoiteriville 
+ https://fullstack-exampleapp.herokuapp.com/spa
+end note
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/spa
+palvelin -> selain: status 304 + sivun HTML
+note right of selain
+ Haetaan HTML-sivun osoittama tyylisivu ja javascript-tiedosto
+end note
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.css
+palvelin -> selain: status 304 + sivun pyytämä CSS-tiedosto
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/spa.js
+palvelin -> selain: status 304 + sivun pyytämä Javascript-tiedosto
+note right of selain
+ Suoritetaan palvelimelta haettu Javascript -tiedosto
+end note
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/data.json
+palvelin -> selain: status 200
+note left of selain
+ Näytetään käyttäjälle Javascript -tiedoston päivittämä sivu
+end note
+

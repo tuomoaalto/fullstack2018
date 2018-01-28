@@ -1,0 +1,29 @@
+title 0.4 Uuden muistiinpanon lisääminen.
+
+kayttaja->selain:
+note right of kayttaja
+ Käyttäjä kirjoittaa muistiinpanon sille varattuun 
+ tekstikenttään ja painaa tallenna painiketta
+end note
+
+selain -> palvelin: POST https://fullstack-exampleapp.herokuapp.com/new_note
+palvelin -> selain: status 302 + Muistiinpanot -sivun HTML
+
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.css
+palvelin -> selain: status 304 + sivun pyytämä CSS-tiedosto
+note right of selain:
+ Päivitetään sivun ulkoasu palvelimelta saadun CSS-tyylitiedoston mukaiseksi
+end note
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/main.js
+palvelin -> selain: status 304 + sivun pyytämä Javascript-tiedosto
+note right of selain
+ Suoritetaan palvelimelta haettu Javascript -tiedosto
+end note
+selain -> palvelin: GET https://fullstack-exampleapp.herokuapp.com/data.json
+note right of selain
+ Haetaan palvelimelta päivittynyt JSON-tiedosto
+end note
+palvelin -> selain: status 200
+note left of selain
+ Näytetään käyttäjälle Javascript -tiedoston päivittämä sivu
+end note
