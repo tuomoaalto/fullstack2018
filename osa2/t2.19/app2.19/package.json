@@ -15,5 +15,6 @@
     "server": "json-server -p3001 db.json",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "proxy": "http://localhost:3001"
 }
