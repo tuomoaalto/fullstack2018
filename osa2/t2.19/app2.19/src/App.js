@@ -68,8 +68,8 @@ class App extends React.Component {
             } else if (numberExists) {
                 personToUpdate = this.state.persons.filter(person => person.number === this.state.newNumber)
             }
-            console.log('id to update:', personToUpdate[0].id)
-            this.updateNameOrNumber(personToUpdate[0].id, nameExists);
+            console.log('id to update:', personToUpdate[0]._id)
+            this.updateNameOrNumber(personToUpdate[0]._id, nameExists);
             return;
         }
 
@@ -103,15 +103,15 @@ class App extends React.Component {
                 .deletePerson(id)
                 .then(response => {
                     this.setState({
-                        persons: this.state.persons.filter(person => person.id !== id),
+                        persons: this.state.persons.filter(person => person._id !== id),
                         infoMsg: 'Henkilö poistettu'
                     })
                 })
                 .catch(error => {
-                    const person = this.state.persons.find(person => person.id === id)
+                    const person = this.state.persons.find(person => person._id === id)
                     this.setState({
                       errorMsg: `Henkilöä '${person.name}' ei valitettavasti löydy enää palvelimelta`,
-                      persons: this.state.persons.filter(p => p.id !== id)
+                      persons: this.state.persons.filter(p => p._id !== id)
                     })
                 })
                 setTimeout(() => {
@@ -128,7 +128,7 @@ class App extends React.Component {
         console.log('nameExists: ', nameExists)
         console.log('newName: ', this.state.newName)
         console.log('newNumber: ', this.state.newNumber)
-        const person = this.state.persons.find(person => person.id === id)
+        const person = this.state.persons.find(person => person._id === id)
         let modifiedPerson
         if (nameExists){
             modifiedPerson = { ...person,  number: this.state.newNumber}
@@ -143,7 +143,7 @@ class App extends React.Component {
             .update(id, modifiedPerson)
             .then(modifiedPerson => {
                 this.setState({
-                    persons: this.state.persons.map(person => person.id !== id ? person : modifiedPerson),
+                    persons: this.state.persons.map(person => person._id !== id ? person : modifiedPerson),
                     newName: '',
                     newNumber: '',
                     infoMsg: "Henkilö päivitetty."
@@ -195,7 +195,7 @@ class App extends React.Component {
                 <table>
                     <tbody>
                         {naytettavatHenkilot.map(person => 
-                        <tr key={person.id}><td>{person.name}</td><td>{person.number}</td><td><button onClick={this.deleteNameAndNumber(person.id)}>Poista</button></td></tr>
+                        <tr key={person.id}><td>{person.name}</td><td>{person.number}</td><td><button onClick={this.deleteNameAndNumber(person._id)}>Poista</button></td></tr>
                     )}
                     </tbody>
                 </table>
